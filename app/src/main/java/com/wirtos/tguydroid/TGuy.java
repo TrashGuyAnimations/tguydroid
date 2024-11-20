@@ -1,8 +1,11 @@
 package com.wirtos.tguydroid;
 
+import android.os.Build;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 public class TGuy {
@@ -27,8 +30,19 @@ public class TGuy {
 
 
     TGuy(String str, int spacing) {
-        tgobj = tguy_jni_ctor(str.getBytes(StandardCharsets.UTF_8), spacing);
-        if (tgobj == 0){
+        byte[] res;
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                res = str.getBytes(StandardCharsets.UTF_8);
+            } else {
+                res = str.getBytes("UTF-8");
+            }
+        } catch (UnsupportedEncodingException e) {
+            res = new byte[]{0x41, 0x41, 0x41, 0x41};
+        }
+        tgobj = tguy_jni_ctor(res, spacing);
+        if (tgobj == 0) {
             throw new OutOfMemoryError();
         }
         frames_count = tguy_jni_get_frames_count(tgobj);
@@ -42,10 +56,18 @@ public class TGuy {
     @Override
     public String toString() {
         byte[] res = tguy_jni_get_text(tgobj);
-        if (res == null){
+        if (res == null) {
             return "";
         }
-        return new String(res, StandardCharsets.UTF_8);
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                return new String(res, StandardCharsets.UTF_8);
+            } else {
+                return new String(res, "UTF-8");
+            }
+        } catch (UnsupportedEncodingException e) {
+            return "Unsupported";
+        }
     }
 
     public int frames_count() { return frames_count; }
