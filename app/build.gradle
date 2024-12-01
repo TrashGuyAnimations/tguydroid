@@ -7,12 +7,6 @@ android {
     // last ndk version that supports deprecated architectures
     ndkVersion "16.1.4479499"
 
-    signingConfigs {
-        release {
-
-        }
-    }
-
     splits {
         abi {
             enable true
@@ -56,7 +50,6 @@ android {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
         debug {
             debuggable true
