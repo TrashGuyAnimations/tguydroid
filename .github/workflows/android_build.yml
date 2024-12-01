@@ -12,6 +12,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Install dependencies
+        run: |
+          sudo apt install -y libncurses5
       - name: Checking out branch
         uses: actions/checkout@v3
 
