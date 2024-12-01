@@ -1,10 +1,8 @@
 name: Production Builds
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: "Release-Build"
-        default: "Generate release build"
+  push:
+    tags: ['*']
+    branches: ["master"]
 
 jobs:
   build:
