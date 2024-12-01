@@ -23,6 +23,7 @@ android {
         minSdkVersion 16
         versionCode 6
         versionName '1.4.1'
+        archivesBaseName = "$applicationId-$versionName"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
