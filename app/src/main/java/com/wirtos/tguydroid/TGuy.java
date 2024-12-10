@@ -1,11 +1,11 @@
 package com.wirtos.tguydroid;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
@@ -36,6 +36,7 @@ public class TGuy {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             res = str.getBytes(StandardCharsets.UTF_8);
         } else {
+            Log.i("TGUYDROID", "TGuy() Falling back to Charset");
             res = str.getBytes(Charset.forName("UTF-8"));
         }
         tgobj = tguy_jni_ctor(res, spacing);
@@ -59,6 +60,7 @@ public class TGuy {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             return new String(res, StandardCharsets.UTF_8);
         } else {
+            Log.i("TGUYDROID", "toString() Falling back to Charset");
             return new String(res, Charset.forName("UTF-8"));
         }
     }
