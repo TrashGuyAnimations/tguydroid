@@ -41,8 +41,8 @@ android {
         applicationId "com.wirtos.tguydroid"
         targetSdkVersion 35
         minSdkVersion 16
-        versionCode 6
-        versionName '1.4.1'
+        versionCode 7
+        versionName '1.5.0'
         archivesBaseName = "$applicationId-$versionName"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 public class TGuy {
@@ -32,14 +33,10 @@ public class TGuy {
     TGuy(String str, int spacing) {
         byte[] res;
 
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                res = str.getBytes(StandardCharsets.UTF_8);
-            } else {
-                res = str.getBytes("UTF-8");
-            }
-        } catch (UnsupportedEncodingException e) {
-            res = new byte[]{0x41, 0x41, 0x41, 0x41};
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            res = str.getBytes(StandardCharsets.UTF_8);
+        } else {
+            res = str.getBytes(Charset.forName("UTF-8"));
         }
         tgobj = tguy_jni_ctor(res, spacing);
         if (tgobj == 0) {
@@ -59,14 +56,10 @@ public class TGuy {
         if (res == null) {
             return "";
         }
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                return new String(res, StandardCharsets.UTF_8);
-            } else {
-                return new String(res, "UTF-8");
-            }
-        } catch (UnsupportedEncodingException e) {
-            return "Unsupported";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return new String(res, StandardCharsets.UTF_8);
+        } else {
+            return new String(res, Charset.forName("UTF-8"));
         }
     }
 
