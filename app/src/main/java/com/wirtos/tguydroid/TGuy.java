@@ -32,7 +32,7 @@ public class TGuy {
 
     TGuy(String str, int spacing) {
         byte[] res;
-
+        Log.i("TGUYDROID", "TGuy()");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             res = str.getBytes(StandardCharsets.UTF_8);
         } else {
