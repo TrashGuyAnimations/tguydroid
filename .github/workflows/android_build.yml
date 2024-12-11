@@ -47,7 +47,7 @@ jobs:
           echo "storeFile=keystore.jks" >> keystore.properties      
 
       - name: Build Release apk
-        run: ./gradlew assembleRelease --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Build Release bundle
         run: ./gradlew bundleRelease --stacktrace
@@ -59,4 +59,4 @@ jobs:
           fail_on_unmatched_files: true
           files: |
             app/build/outputs/bundle/release/*.aab
-            app/build/outputs/apk/release/*.apk
+            app/build/outputs/apk/debug/*.apk
