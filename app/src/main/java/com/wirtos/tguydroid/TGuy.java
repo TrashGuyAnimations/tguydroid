@@ -31,38 +31,19 @@ public class TGuy {
 
 
     TGuy(String str, int spacing) {
-        byte[] res;
-        Log.i("TGUYDROID", "TGuy()");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            res = str.getBytes(StandardCharsets.UTF_8);
-        } else {
-            Log.i("TGUYDROID", "TGuy() Falling back to Charset");
-            res = str.getBytes(Charset.forName("UTF-8"));
-        }
-        tgobj = tguy_jni_ctor(res, spacing);
-        if (tgobj == 0) {
-            throw new OutOfMemoryError();
-        }
-        frames_count = tguy_jni_get_frames_count(tgobj);
+
+        tgobj = 0;
+        frames_count = 1;
     }
 
     public void close() {
-        tguy_jni_dtor(tgobj);
+
     }
 
     @NonNull
     @Override
     public String toString() {
-        byte[] res = tguy_jni_get_text(tgobj);
-        if (res == null) {
-            return "";
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            return new String(res, StandardCharsets.UTF_8);
-        } else {
-            Log.i("TGUYDROID", "toString() Falling back to Charset");
-            return new String(res, Charset.forName("UTF-8"));
-        }
+      return "test";
     }
 
     public int frames_count() { return frames_count; }
@@ -71,7 +52,7 @@ public class TGuy {
         if (frame >= frames_count - 1) {
             cur_frame = 0;
         }
-        tguy_jni_set_frame(tgobj, cur_frame);
+
     }
 
     public String next() {
