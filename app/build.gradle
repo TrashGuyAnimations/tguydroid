@@ -14,8 +14,9 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 android {
-    compileSdk 31
-    // last ndk version that supports deprecated architectures
+    compileSdk 34
+    buildToolsVersion "30.0.2"
+// last ndk version that supports deprecated architectures
     ndkVersion "16.1.4479499"
 
     splits {
@@ -39,10 +40,10 @@ android {
 
     defaultConfig {
         applicationId "com.wirtos.tguydroid"
-        targetSdkVersion 35
+        targetSdkVersion 34
         minSdkVersion 16
-        versionCode 8
-        versionName '1.5.1'
+        versionCode 9
+        versionName '1.5.2'
         archivesBaseName = "$applicationId-$versionName"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -81,6 +82,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    buildToolsVersion '30.0.2'
 }
 
 dependencies {

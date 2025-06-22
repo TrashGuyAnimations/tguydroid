@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stddef.h>
+#include <android/log.h>
 
 typedef struct {
     TrashGuyState *tg;
@@ -15,6 +16,7 @@ JNIEXPORT jlong JNICALL
 Java_com_wirtos_tguydroid_TGuy_tguy_1jni_1ctor(JNIEnv *env, jobject thiz,
                                                jbyteArray text, jint spacing) {
     (void) thiz;
+    __android_log_print(ANDROID_LOG_INFO, "TGUYDROID", "ctor");
     const size_t u8len = (*env)->GetArrayLength(env, text);
     nat_ctx *ctx = NULL;
     TrashGuyState *tg = NULL;
@@ -45,6 +47,7 @@ Java_com_wirtos_tguydroid_TGuy_tguy_1jni_1ctor(JNIEnv *env, jobject thiz,
 
 JNIEXPORT void JNICALL
 Java_com_wirtos_tguydroid_TGuy_tguy_1jni_1dtor(JNIEnv *env, jobject thiz, jlong tgobj) {
+    __android_log_print(ANDROID_LOG_INFO, "TGUYDROID", "dtor");
     (void) env, (void) thiz;
     nat_ctx *ctx = (nat_ctx *) tgobj;
     if (ctx) {
@@ -58,6 +61,7 @@ JNIEXPORT void JNICALL
 Java_com_wirtos_tguydroid_TGuy_tguy_1jni_1set_1frame(JNIEnv *env, jobject thiz, jlong tgobj,
                                                      jint frame) {
     (void) env, (void) thiz;
+    __android_log_print(ANDROID_LOG_INFO, "TGUYDROID", "set_frame");
     nat_ctx *ctx = (nat_ctx *) tgobj;
     tguy_set_frame(ctx->tg, frame);
 }
