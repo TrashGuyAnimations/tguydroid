@@ -75,8 +75,7 @@ public class TGuy {
     }
 
     public String next() {
-        set_frame(cur_frame);
-        cur_frame++;
+        set_frame(cur_frame++);
         return this.toString();
     }
 }
