@@ -68,13 +68,13 @@ public class TGuy {
     public int frames_count() { return frames_count; }
 
     private void set_frame(int frame) {
-        if (frame >= frames_count - 1) {
-            cur_frame = 0;
-        }
-        tguy_jni_set_frame(tgobj, cur_frame);
+        tguy_jni_set_frame(tgobj, frame);
     }
 
     public String next() {
+        if (cur_frame >= frames_count - 1) {
+            cur_frame = 0;
+        }
         set_frame(cur_frame++);
         return this.toString();
     }
